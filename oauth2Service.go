@@ -14,6 +14,8 @@ type AuthCodeAuthorize struct {
 	Scope       string
 	State       string
 	OverrideURI string
+	Req         *http.Request
+	Res         http.ResponseWriter
 }
 
 //AuthCodeAuthorizeUser authorize a user with grant type code
@@ -26,15 +28,16 @@ func (a *AuthCodeAuthorize) AuthCodeAuthorizeUser() bool {
 		uri = a.OauthHost + oauthAuthCodeAuthorizeURI1 + a.ClientID + oauthAuthCodeAuthorizeURI2 +
 			a.RedirectURI + oauthAuthCodeAuthorizeURI3 + a.Scope + oauthAuthCodeAuthorizeURI4 + a.State
 	}
+	http.Redirect(a.Res, a.Req, uri, 301)
 	//fmt.Print("AuthCode Authorize URI: ")
 	//fmt.Println(uri)
-	resp, err := http.Get(uri)
-	if err != nil {
-		panic(err)
-	} else {
-		rtn = true
-	}
-	defer resp.Body.Close()
+	// resp, err := http.Get(uri)
+	// if err != nil {
+	// 	panic(err)
+	// } else {
+	// 	rtn = true
+	// }
+	// defer resp.Body.Close()
 	return rtn
 
 }
