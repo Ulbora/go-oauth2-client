@@ -88,7 +88,6 @@ func TestClientCredentialsToken(t *testing.T) {
 	tn.OauthHost = "http://localhost:3000"
 	tn.ClientID = "403"
 	tn.Secret = "554444vfg55ggfff22454sw2fff2dsfd"
-
 	token := tn.ClientCredentialsToken()
 	fmt.Print("Returned Token: ")
 	fmt.Println(token.AccessToken)
