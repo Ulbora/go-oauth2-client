@@ -12,7 +12,9 @@ $ go get github.com/Ulbora/go-oauth2-client
 
 # Usage
 
-## Auth Code Authorize
+## Auth Code Grant Type
+
+### Auth Code Authorize
 ```
     var a AuthCodeAuthorize
 	a.ClientID = "211"
@@ -46,6 +48,7 @@ $ go get github.com/Ulbora/go-oauth2-client
 	token := tn.AuthCodeRefreshToken()
 
 ```
+## Implicit Grant Type
 
 ### Implicit Authorize
 
@@ -59,6 +62,7 @@ $ go get github.com/Ulbora/go-oauth2-client
 	res := a.ImplicitAuthorize()
 
 ```
+## Client Credentials Grant Type
 
 ### Client Credentials Token
 
@@ -71,10 +75,10 @@ $ go get github.com/Ulbora/go-oauth2-client
 
 ```
 
-### Password Grant Type
+## Password Grant Type
 Not supported
 
-# Returned Token for grant types Auth Code, Refresh, and Client Credentials
+## Returned Token for grant types Auth Code, Refresh, and Client Credentials
 
 ```
 type Token struct {
@@ -86,6 +90,6 @@ type Token struct {
 }
 ```
 
-# Returned by Implicit
+## Returned by Implicit
 Implicit grand type calls the redirect URI and passes the token as a query parm.
 
