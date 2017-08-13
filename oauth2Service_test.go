@@ -2,18 +2,32 @@ package services
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
 func TestAuthCodeAuthorize_AuthCodeAuthorizeUser(t *testing.T) {
+	req, err := http.NewRequest("GET", "http://example.com", nil) // new(http.Request)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res := httptest.NewRecorder()
+	fmt.Print("req: ")
+	fmt.Println(req)
+	fmt.Print("res: ")
+	fmt.Println(res)
 	var a AuthCodeAuthorize
 	a.ClientID = "211"
 	a.OauthHost = "http://localhost:3000"
 	a.RedirectURI = "http:/localhost/token"
 	a.Scope = "write"
 	a.State = "12345"
-	res := a.AuthCodeAuthorizeUser()
-	if res != true {
+	a.Req = req
+	a.Res = res
+	resp := a.AuthCodeAuthorizeUser()
+	if resp != true {
 		t.Fail()
 	}
 

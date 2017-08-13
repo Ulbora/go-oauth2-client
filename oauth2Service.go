@@ -24,22 +24,14 @@ func (a *AuthCodeAuthorize) AuthCodeAuthorizeUser() bool {
 	var uri string
 	if a.OverrideURI != "" {
 		uri = a.OverrideURI
+		rtn = true
 	} else {
 		uri = a.OauthHost + oauthAuthCodeAuthorizeURI1 + a.ClientID + oauthAuthCodeAuthorizeURI2 +
 			a.RedirectURI + oauthAuthCodeAuthorizeURI3 + a.Scope + oauthAuthCodeAuthorizeURI4 + a.State
+		rtn = true
 	}
-	http.Redirect(a.Res, a.Req, uri, 301)
-	//fmt.Print("AuthCode Authorize URI: ")
-	//fmt.Println(uri)
-	// resp, err := http.Get(uri)
-	// if err != nil {
-	// 	panic(err)
-	// } else {
-	// 	rtn = true
-	// }
-	// defer resp.Body.Close()
+	http.Redirect(a.Res, a.Req, uri, http.StatusFound)
 	return rtn
-
 }
 
 //AuthCodeToken auth code token
