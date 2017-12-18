@@ -85,14 +85,21 @@ func TestAuthCodeRefreshToken(t *testing.T) {
 }
 
 func TestImplicitAuthorize(t *testing.T) {
+	req, err := http.NewRequest("GET", "http://example.com", nil) // new(http.Request)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res := httptest.NewRecorder()
 	var a ImplicitAuthorize
 	a.ClientID = "403"
 	a.OauthHost = "http://localhost:3000"
 	a.RedirectURI = "http://www.google.com"
 	a.Scope = "read"
 	a.State = "12345"
-	res := a.ImplicitAuthorize()
-	if res != true {
+	a.Req = req
+	a.Res = res
+	resp := a.ImplicitAuthorize()
+	if resp != true {
 		t.Fail()
 	}
 }

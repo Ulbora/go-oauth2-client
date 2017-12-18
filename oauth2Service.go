@@ -116,6 +116,8 @@ type ImplicitAuthorize struct {
 	Scope       string
 	State       string
 	OverrideURI string
+	Req         *http.Request
+	Res         http.ResponseWriter
 }
 
 //ImplicitAuthorize implicit authorize
@@ -127,16 +129,9 @@ func (i *ImplicitAuthorize) ImplicitAuthorize() bool {
 	} else {
 		uri = i.OauthHost + implicitAuthorizeURI1 + i.ClientID + implicitAuthorizeURI2 +
 			i.RedirectURI + implicitAuthorizeURI3 + i.Scope + implicitAuthorizeURI4 + i.State
-	}
-	//fmt.Print("Implicit Authorize URI: ")
-	//fmt.Println(uri)
-	resp, err := http.Get(uri)
-	if err != nil {
-		panic(err)
-	} else {
 		rtn = true
 	}
-	defer resp.Body.Close()
+	http.Redirect(i.Res, i.Req, uri, http.StatusFound)
 	return rtn
 }
 
