@@ -2,7 +2,8 @@ package services
 
 import (
 	"encoding/json"
-	"log"
+	"fmt"
+
 	"net/http"
 )
 
@@ -63,11 +64,14 @@ func (t *AuthCodeToken) AuthCodeToken() *Token {
 		uri = t.OauthHost + oauthAuthCodeTokenURI1 + t.ClientID + oauthAuthCodeTokenURI2 + t.Secret +
 			oauthAuthCodeTokenURI3 + t.Code + oauthAuthCodeTokenURI4 + t.RedirectURI
 	}
-	//fmt.Print("AuthCode Token URI: ")
-	//fmt.Println(uri)
+	fmt.Print("AuthCode Token URI: ")
+	fmt.Println(uri)
 	resp, err := http.Post(uri, "", nil)
 	if err != nil {
-		panic(err)
+		fmt.Print("Token Post Error: ")
+		fmt.Println(err)
+		fmt.Print("Token Post Error Resp: ")
+		fmt.Println(resp)
 	}
 	defer resp.Body.Close()
 	rtn := new(Token)
@@ -75,7 +79,8 @@ func (t *AuthCodeToken) AuthCodeToken() *Token {
 		decoder := json.NewDecoder(resp.Body)
 		error := decoder.Decode(&rtn)
 		if error != nil {
-			log.Println(error.Error())
+			fmt.Print("Token decode Error: ")
+			fmt.Println(error)
 		}
 	}
 	return rtn
@@ -94,7 +99,8 @@ func (t *AuthCodeToken) AuthCodeRefreshToken() *Token {
 	//fmt.Println(uri)
 	resp, err := http.Post(uri, "", nil)
 	if err != nil {
-		panic(err)
+		fmt.Print("Auth code refresh Post Error: ")
+		fmt.Println(err)
 	}
 	defer resp.Body.Close()
 	rtn := new(Token)
@@ -102,7 +108,8 @@ func (t *AuthCodeToken) AuthCodeRefreshToken() *Token {
 		decoder := json.NewDecoder(resp.Body)
 		error := decoder.Decode(&rtn)
 		if error != nil {
-			log.Println(error.Error())
+			fmt.Print("Token decode Error: ")
+			fmt.Println(error)
 		}
 	}
 	return rtn
@@ -156,7 +163,8 @@ func (c *ClientCredentialsToken) ClientCredentialsToken() *Token {
 	//fmt.Println(uri)
 	resp, err := http.Post(uri, "", nil)
 	if err != nil {
-		panic(err)
+		fmt.Print("Client cred Post Error: ")
+		fmt.Println(err)
 	}
 	defer resp.Body.Close()
 	rtn := new(Token)
@@ -164,7 +172,8 @@ func (c *ClientCredentialsToken) ClientCredentialsToken() *Token {
 		decoder := json.NewDecoder(resp.Body)
 		error := decoder.Decode(&rtn)
 		if error != nil {
-			log.Println(error.Error())
+			fmt.Print("Token decode Error: ")
+			fmt.Println(error)
 		}
 	}
 	return rtn
