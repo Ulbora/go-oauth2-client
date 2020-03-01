@@ -1,7 +1,7 @@
 go-oauth2-client
 ==============
 
-Go OAuth2 client for access a OAuth2 Server from a golang application
+Mockable Go OAuth2 client for access a OAuth2 Server from a golang application
 
 # Installation
 

@@ -7,6 +7,11 @@ import (
 	"net/http"
 )
 
+//AuthCodeUser AuthCodeUser
+type AuthCodeUser interface {
+	AuthCodeAuthorizeUser() bool
+}
+
 //AuthCodeAuthorize auth code
 type AuthCodeAuthorize struct {
 	OauthHost   string
@@ -17,6 +22,13 @@ type AuthCodeAuthorize struct {
 	OverrideURI string
 	Req         *http.Request
 	Res         http.ResponseWriter
+}
+
+//GetNew GetNew
+func (a *AuthCodeAuthorize) GetNew() AuthCodeUser {
+	var ac AuthCodeUser
+	ac = a
+	return ac
 }
 
 //AuthCodeAuthorizeUser authorize a user with grant type code
@@ -33,6 +45,12 @@ func (a *AuthCodeAuthorize) AuthCodeAuthorizeUser() bool {
 	}
 	http.Redirect(a.Res, a.Req, uri, http.StatusFound)
 	return rtn
+}
+
+//AuthToken AuthCodeToken
+type AuthToken interface {
+	AuthCodeToken() *Token
+	AuthCodeRefreshToken() *Token
 }
 
 //AuthCodeToken auth code token
@@ -53,6 +71,13 @@ type Token struct {
 	TokenType     string `json:"token_type"`
 	ExpiresIn     int    `json:"expires_in"`
 	ErrorReturned string `json:"error"`
+}
+
+//GetNew GetNew
+func (t *AuthCodeToken) GetNew() AuthToken {
+	var at AuthToken
+	at = t
+	return at
 }
 
 //AuthCodeToken auth code token
@@ -115,6 +140,11 @@ func (t *AuthCodeToken) AuthCodeRefreshToken() *Token {
 	return rtn
 }
 
+//Implicit Implicit
+type Implicit interface {
+	ImplicitAuthorize() bool
+}
+
 //ImplicitAuthorize implicit authorize
 type ImplicitAuthorize struct {
 	OauthHost   string
@@ -125,6 +155,13 @@ type ImplicitAuthorize struct {
 	OverrideURI string
 	Req         *http.Request
 	Res         http.ResponseWriter
+}
+
+//GetNew GetNew
+func (i *ImplicitAuthorize) GetNew() Implicit {
+	var it Implicit
+	it = i
+	return it
 }
 
 //ImplicitAuthorize implicit authorize
@@ -142,12 +179,24 @@ func (i *ImplicitAuthorize) ImplicitAuthorize() bool {
 	return rtn
 }
 
+//Credentials Credentials
+type Credentials interface {
+	ClientCredentialsToken() *Token
+}
+
 // ClientCredentialsToken client credentials token
 type ClientCredentialsToken struct {
 	OauthHost   string
 	ClientID    string
 	Secret      string
 	OverrideURI string
+}
+
+//GetNew GetNew
+func (c *ClientCredentialsToken) GetNew() Credentials {
+	var cc Credentials
+	cc = c
+	return cc
 }
 
 //ClientCredentialsToken get client credentials token
@@ -178,3 +227,5 @@ func (c *ClientCredentialsToken) ClientCredentialsToken() *Token {
 	}
 	return rtn
 }
+
+//go mod init github.com/Ulbora/go-oauth2-client

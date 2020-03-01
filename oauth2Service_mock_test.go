@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestAuthCodeAuthorize_AuthCodeAuthorizeUser(t *testing.T) {
+func TestAuthCodeAuthorizem_AuthCodeAuthorizeUser(t *testing.T) {
 	req, err := http.NewRequest("GET", "http://example.com", nil) // new(http.Request)
 	if err != nil {
 		log.Fatal(err)
@@ -18,7 +18,8 @@ func TestAuthCodeAuthorize_AuthCodeAuthorizeUser(t *testing.T) {
 	fmt.Println(req)
 	fmt.Print("res: ")
 	fmt.Println(res)
-	var a AuthCodeAuthorize
+	var a MockAuthCodeAuthorize
+	a.MockRtn = true
 	a.ClientID = "211"
 	a.OauthHost = "http://localhost:3000"
 	a.RedirectURI = "http:/localhost/token"
@@ -34,8 +35,11 @@ func TestAuthCodeAuthorize_AuthCodeAuthorizeUser(t *testing.T) {
 
 }
 
-func TestAuthCodeToken(t *testing.T) {
-	var tn AuthCodeToken
+func TestAuthCodeTokenm(t *testing.T) {
+	var tn MockAuthCodeToken
+	var tnt Token
+	tnt.ErrorReturned = "invalid_client"
+	tn.MockToken = &tnt
 	tn.OauthHost = "http://localhost:3000"
 	tn.ClientID = "10"
 	tn.Secret = "dfgdfgdgd"
@@ -61,8 +65,11 @@ func TestAuthCodeToken(t *testing.T) {
 	}
 }
 
-func TestAuthCodeRefreshToken(t *testing.T) {
-	var tn AuthCodeToken
+func TestAuthCodeRefreshTokenm(t *testing.T) {
+	var tn MockAuthCodeToken
+	var tnt Token
+	tnt.ErrorReturned = "invalid_client"
+	tn.MockToken = &tnt
 	tn.OauthHost = "http://localhost:3000"
 	tn.ClientID = "10"
 	tn.Secret = "554444vfg55ggfff22454sw2fff2dsfd"
@@ -86,13 +93,14 @@ func TestAuthCodeRefreshToken(t *testing.T) {
 	}
 }
 
-func TestImplicitAuthorize(t *testing.T) {
+func TestImplicitAuthorizem(t *testing.T) {
 	req, err := http.NewRequest("GET", "http://example.com", nil) // new(http.Request)
 	if err != nil {
 		log.Fatal(err)
 	}
 	res := httptest.NewRecorder()
-	var a ImplicitAuthorize
+	var a MockImplicitAuthorize
+	a.MockRtn = true
 	a.ClientID = "10"
 	a.OauthHost = "http://localhost:3000"
 	a.RedirectURI = "http://www.google.com"
@@ -107,8 +115,12 @@ func TestImplicitAuthorize(t *testing.T) {
 	}
 }
 
-func TestClientCredentialsToken(t *testing.T) {
-	var tn ClientCredentialsToken
+func TestClientCredentialsTokenm(t *testing.T) {
+	var tn MockClientCredentialsToken
+	var tnt Token
+	//tnt.ErrorReturned = "invalid_client"
+	tnt.TokenType = "bearer"
+	tn.MockToken = &tnt
 	tn.OauthHost = "http://localhost:3000"
 	tn.ClientID = "10"
 	tn.Secret = "jhcy2YGrvgDsm4VRVtUESiI96K65gQeXcA2TQCJYZW0J1cYLio"
