@@ -10,6 +10,14 @@ import (
 //AuthCodeUser AuthCodeUser
 type AuthCodeUser interface {
 	AuthCodeAuthorizeUser() bool
+	SetOauthHost(host string)
+	SetRedirectURI(uri string)
+	SetClientID(id string)
+	SetScope(scope string)
+	SetState(state string)
+	SetOverrideURI(uri string)
+	SetReq(r *http.Request)
+	SetRes(w http.ResponseWriter)
 }
 
 //AuthCodeAuthorize auth code
@@ -22,6 +30,46 @@ type AuthCodeAuthorize struct {
 	OverrideURI string
 	Req         *http.Request
 	Res         http.ResponseWriter
+}
+
+//SetOauthHost SetOauthHost
+func (a *AuthCodeAuthorize) SetOauthHost(host string) {
+	a.OauthHost = host
+}
+
+//SetRedirectURI SetRedirectURI
+func (a *AuthCodeAuthorize) SetRedirectURI(uri string) {
+	a.RedirectURI = uri
+}
+
+//SetClientID SetClientID
+func (a *AuthCodeAuthorize) SetClientID(id string) {
+	a.ClientID = id
+}
+
+//SetScope SetScope
+func (a *AuthCodeAuthorize) SetScope(scope string) {
+	a.Scope = scope
+}
+
+//SetState SetState
+func (a *AuthCodeAuthorize) SetState(state string) {
+	a.State = state
+}
+
+//SetOverrideURI SetOverrideURI
+func (a *AuthCodeAuthorize) SetOverrideURI(uri string) {
+	a.OverrideURI = uri
+}
+
+//SetReq SetReq
+func (a *AuthCodeAuthorize) SetReq(r *http.Request) {
+	a.Req = r
+}
+
+//SetRes SetRes
+func (a *AuthCodeAuthorize) SetRes(w http.ResponseWriter) {
+	a.Res = w
 }
 
 //GetNew GetNew
@@ -51,6 +99,13 @@ func (a *AuthCodeAuthorize) AuthCodeAuthorizeUser() bool {
 type AuthToken interface {
 	AuthCodeToken() *Token
 	AuthCodeRefreshToken() *Token
+	SetOauthHost(host string)
+	SetRedirectURI(uri string)
+	SetClientID(id string)
+	SetSecret(sec string)
+	SetCode(code string)
+	SetRefreshToken(tkn string)
+	SetOverrideURI(uri string)
 }
 
 //AuthCodeToken auth code token
@@ -62,6 +117,41 @@ type AuthCodeToken struct {
 	Code         string
 	RefreshToken string
 	OverrideURI  string
+}
+
+//SetOauthHost SetOauthHost
+func (t *AuthCodeToken) SetOauthHost(host string) {
+	t.OauthHost = host
+}
+
+//SetRedirectURI SetRedirectURI
+func (t *AuthCodeToken) SetRedirectURI(uri string) {
+	t.RedirectURI = uri
+}
+
+//SetClientID SetClientID
+func (t *AuthCodeToken) SetClientID(id string) {
+	t.ClientID = id
+}
+
+//SetSecret SetSecret
+func (t *AuthCodeToken) SetSecret(sec string) {
+	t.Secret = sec
+}
+
+//SetCode SetCode
+func (t *AuthCodeToken) SetCode(code string) {
+	t.Code = code
+}
+
+//SetRefreshToken SetRefreshToken
+func (t *AuthCodeToken) SetRefreshToken(tkn string) {
+	t.RefreshToken = tkn
+}
+
+//SetOverrideURI SetOverrideURI
+func (t *AuthCodeToken) SetOverrideURI(uri string) {
+	t.OverrideURI = uri
 }
 
 //Token the access token
@@ -143,6 +233,14 @@ func (t *AuthCodeToken) AuthCodeRefreshToken() *Token {
 //Implicit Implicit
 type Implicit interface {
 	ImplicitAuthorize() bool
+	SetOauthHost(host string)
+	SetRedirectURI(uri string)
+	SetClientID(id string)
+	SetScope(scope string)
+	SetState(state string)
+	SetOverrideURI(uri string)
+	SetReq(r *http.Request)
+	SetRes(w http.ResponseWriter)
 }
 
 //ImplicitAuthorize implicit authorize
@@ -155,6 +253,46 @@ type ImplicitAuthorize struct {
 	OverrideURI string
 	Req         *http.Request
 	Res         http.ResponseWriter
+}
+
+//SetOauthHost SetOauthHost
+func (i *ImplicitAuthorize) SetOauthHost(host string) {
+	i.OauthHost = host
+}
+
+//SetRedirectURI SetRedirectURI
+func (i *ImplicitAuthorize) SetRedirectURI(uri string) {
+	i.RedirectURI = uri
+}
+
+//SetClientID SetClientID
+func (i *ImplicitAuthorize) SetClientID(id string) {
+	i.ClientID = id
+}
+
+//SetScope SetScope
+func (i *ImplicitAuthorize) SetScope(scope string) {
+	i.Scope = scope
+}
+
+//SetState SetState
+func (i *ImplicitAuthorize) SetState(state string) {
+	i.State = state
+}
+
+//SetOverrideURI SetOverrideURI
+func (i *ImplicitAuthorize) SetOverrideURI(uri string) {
+	i.OverrideURI = uri
+}
+
+//SetReq SetReq
+func (i *ImplicitAuthorize) SetReq(r *http.Request) {
+	i.Req = r
+}
+
+//SetRes SetRes
+func (i *ImplicitAuthorize) SetRes(w http.ResponseWriter) {
+	i.Res = w
 }
 
 //GetNew GetNew
@@ -182,6 +320,10 @@ func (i *ImplicitAuthorize) ImplicitAuthorize() bool {
 //Credentials Credentials
 type Credentials interface {
 	ClientCredentialsToken() *Token
+	SetOauthHost(host string)
+	SetClientID(id string)
+	SetSecret(sec string)
+	SetOverrideURI(uri string)
 }
 
 // ClientCredentialsToken client credentials token
@@ -190,6 +332,26 @@ type ClientCredentialsToken struct {
 	ClientID    string
 	Secret      string
 	OverrideURI string
+}
+
+//SetOauthHost SetOauthHost
+func (c *ClientCredentialsToken) SetOauthHost(host string) {
+	c.OauthHost = host
+}
+
+//SetClientID SetClientID
+func (c *ClientCredentialsToken) SetClientID(id string) {
+	c.ClientID = id
+}
+
+//SetSecret SetSecret
+func (c *ClientCredentialsToken) SetSecret(sec string) {
+	c.Secret = sec
+}
+
+//SetOverrideURI SetOverrideURI
+func (c *ClientCredentialsToken) SetOverrideURI(uri string) {
+	c.OverrideURI = uri
 }
 
 //GetNew GetNew

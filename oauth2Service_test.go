@@ -37,11 +37,12 @@ func TestAuthCodeAuthorize_AuthCodeAuthorizeUser(t *testing.T) {
 func TestAuthCodeToken(t *testing.T) {
 	var tn AuthCodeToken
 	tn.OauthHost = "http://localhost:3000"
-	tn.ClientID = "10"
+	//tn.ClientID = "10"
 	tn.Secret = "dfgdfgdgd"
 	tn.Code = "yfgk5mj481QSl46n2zIZGl"
 	tn.RedirectURI = "http://www.google.com"
 	tnn := tn.GetNew()
+	tnn.SetClientID("10")
 	token := tnn.AuthCodeToken()
 	fmt.Print("Returned Token: ")
 	fmt.Println(token.AccessToken)

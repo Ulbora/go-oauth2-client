@@ -17,6 +17,46 @@ type MockAuthCodeAuthorize struct {
 	MockRtn     bool
 }
 
+//SetOauthHost SetOauthHost
+func (a *MockAuthCodeAuthorize) SetOauthHost(host string) {
+	a.OauthHost = host
+}
+
+//SetRedirectURI SetRedirectURI
+func (a *MockAuthCodeAuthorize) SetRedirectURI(uri string) {
+	a.RedirectURI = uri
+}
+
+//SetClientID SetClientID
+func (a *MockAuthCodeAuthorize) SetClientID(id string) {
+	a.ClientID = id
+}
+
+//SetScope SetScope
+func (a *MockAuthCodeAuthorize) SetScope(scope string) {
+	a.Scope = scope
+}
+
+//SetState SetState
+func (a *MockAuthCodeAuthorize) SetState(state string) {
+	a.State = state
+}
+
+//SetOverrideURI SetOverrideURI
+func (a *MockAuthCodeAuthorize) SetOverrideURI(uri string) {
+	a.OverrideURI = uri
+}
+
+//SetReq SetReq
+func (a *MockAuthCodeAuthorize) SetReq(r *http.Request) {
+	a.Req = r
+}
+
+//SetRes SetRes
+func (a *MockAuthCodeAuthorize) SetRes(w http.ResponseWriter) {
+	a.Res = w
+}
+
 //GetNew GetNew
 func (a *MockAuthCodeAuthorize) GetNew() AuthCodeUser {
 	var ac AuthCodeUser
@@ -39,6 +79,41 @@ type MockAuthCodeToken struct {
 	RefreshToken string
 	OverrideURI  string
 	MockToken    *Token
+}
+
+//SetOauthHost SetOauthHost
+func (t *MockAuthCodeToken) SetOauthHost(host string) {
+	t.OauthHost = host
+}
+
+//SetRedirectURI SetRedirectURI
+func (t *MockAuthCodeToken) SetRedirectURI(uri string) {
+	t.RedirectURI = uri
+}
+
+//SetClientID SetClientID
+func (t *MockAuthCodeToken) SetClientID(id string) {
+	t.ClientID = id
+}
+
+//SetSecret SetSecret
+func (t *MockAuthCodeToken) SetSecret(sec string) {
+	t.Secret = sec
+}
+
+//SetCode SetCode
+func (t *MockAuthCodeToken) SetCode(code string) {
+	t.Code = code
+}
+
+//SetRefreshToken SetRefreshToken
+func (t *MockAuthCodeToken) SetRefreshToken(tkn string) {
+	t.RefreshToken = tkn
+}
+
+//SetOverrideURI SetOverrideURI
+func (t *MockAuthCodeToken) SetOverrideURI(uri string) {
+	t.OverrideURI = uri
 }
 
 //GetNew GetNew
@@ -71,6 +146,46 @@ type MockImplicitAuthorize struct {
 	MockRtn     bool
 }
 
+//SetOauthHost SetOauthHost
+func (i *MockImplicitAuthorize) SetOauthHost(host string) {
+	i.OauthHost = host
+}
+
+//SetRedirectURI SetRedirectURI
+func (i *MockImplicitAuthorize) SetRedirectURI(uri string) {
+	i.RedirectURI = uri
+}
+
+//SetClientID SetClientID
+func (i *MockImplicitAuthorize) SetClientID(id string) {
+	i.ClientID = id
+}
+
+//SetScope SetScope
+func (i *MockImplicitAuthorize) SetScope(scope string) {
+	i.Scope = scope
+}
+
+//SetState SetState
+func (i *MockImplicitAuthorize) SetState(state string) {
+	i.State = state
+}
+
+//SetOverrideURI SetOverrideURI
+func (i *MockImplicitAuthorize) SetOverrideURI(uri string) {
+	i.OverrideURI = uri
+}
+
+//SetReq SetReq
+func (i *MockImplicitAuthorize) SetReq(r *http.Request) {
+	i.Req = r
+}
+
+//SetRes SetRes
+func (i *MockImplicitAuthorize) SetRes(w http.ResponseWriter) {
+	i.Res = w
+}
+
 //GetNew GetNew
 func (i *MockImplicitAuthorize) GetNew() Implicit {
 	var it Implicit
@@ -90,6 +205,26 @@ type MockClientCredentialsToken struct {
 	Secret      string
 	OverrideURI string
 	MockToken   *Token
+}
+
+//SetOauthHost SetOauthHost
+func (c *MockClientCredentialsToken) SetOauthHost(host string) {
+	c.OauthHost = host
+}
+
+//SetClientID SetClientID
+func (c *MockClientCredentialsToken) SetClientID(id string) {
+	c.ClientID = id
+}
+
+//SetSecret SetSecret
+func (c *MockClientCredentialsToken) SetSecret(sec string) {
+	c.Secret = sec
+}
+
+//SetOverrideURI SetOverrideURI
+func (c *MockClientCredentialsToken) SetOverrideURI(uri string) {
+	c.OverrideURI = uri
 }
 
 //GetNew GetNew
